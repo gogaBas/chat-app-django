@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %} 
+
+{% block title %}Sign up | {% endblock %} 
+
+{%block content %}
+<div class="p-10 lg:p20 text-center">
+    <h1 class="text-3xl lg:text-6xl text-white">Sign up</h1>
+</div>
+
+<form method="POST" action="." class="lg:w-1/4 px-4 mx-auto">
+    {% csrf_token %}
+
+    <div class="mb-5">
+        <label for="username" class="text-white hover:text-red-300">Username</label>
+
+        <input type="text" class="w-full mt-2 px-4 py-2 rounded-xl" name="username" id="username">
+    </div>
+
+    <div class="mb-5">
+        <label for="password1" class="text-white hover:text-red-300">Password</label>
+
+        <input type="password" class="w-full mt-2 px-4 py-2 rounded-xl" name="password1" id="password1">
+    </div>
+
+    <div class="mb-5">
+        <label for="password2" class="text-white hover:text-red-300">Confirm Password</label>
+
+        <input type="password" class="w-full mt-2 px-4 py-2 rounded-xl" name="password2" id="password2">
+    </div>
+
+    {%if form.errors%}
+        {%for field in form %}
+            {% for error in field.errors %}
+                <div class="mb-5 p-4 rounded-xl bg-red-300 text-white">
+                    <p>{{ error|escape }}</p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <button type="submit" class="px-5 py-3 text-white rounded-xl bg-teal-800 hover:bg-teal-700">Sign Up</button>
+</form>
+{% endblock %}
